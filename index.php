@@ -8,8 +8,6 @@ define('CORE', APP.'core'.DIRECTORY_SEPARATOR);
 define('CONTROLLER', APP.'controllers'.DIRECTORY_SEPARATOR);
 define('TEMPLATES',VIEW.'Templates'.DIRECTORY_SEPARATOR);
 
-echo ROOT;
-
 spl_autoload_register(function ($classname){
     if (file_exists(CORE.$classname.'.php'))
         include (CORE.$classname.'.php') ;
