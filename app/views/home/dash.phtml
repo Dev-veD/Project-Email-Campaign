@@ -1,0 +1,10 @@
+<?php include VIEW.'header.phtml' ?>
+
+<?php echo "Welcome ".$_SESSION['firstname']." ".$_SESSION['lastname']." You are logged in. Your Email is ".$_SESSION['email']."<br>";
+if(isset($_SESSION['firstname'])){
+   RedirectToAction("home", index);
+}?>
+<a href='logout' >Logout</a>
+
+
+<?php include VIEW.'footer.phtml' ?>

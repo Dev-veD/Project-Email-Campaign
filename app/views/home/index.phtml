@@ -1,0 +1,33 @@
+<?php include VIEW.'header.phtml' ?>
+<?php  ?>
+<div class="row">
+  <div class="col-md-3" style="padding:40px">
+    <p align='center'>We All Love to send Emails So Why not use this .</p>
+  </div>
+  <div class="col-md-9">
+    <div id='login'>
+      <?php include VIEW.'login.phtml' ?>
+    </div>
+    <div id='register'>
+      <?php include VIEW."home/register.phtml";?>
+    </div>
+  </div>
+</div>
+<script>
+  function myLogin() {
+    var x = document.getElementById("login");
+    var y = document.getElementById("register");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+      y.style.display = "none";
+
+    } else {
+      x.style.display = "none";
+      y.style.display = "block";
+
+    }
+  }
+
+</script>
+
+<?php include VIEW.'footer.phtml' ?>

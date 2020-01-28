@@ -1,0 +1,24 @@
+<?php
+
+require_once APP.'Externals/config.php';
+ $loginURL = $gClient -> createAuthUrl();
+
+?>
+<div class='container' style="margin-top : 100px">
+        <div class = "row justify-content-center">
+            <div class = "col-md-6 col-offset-3" align="center">
+
+              <h1>SignIn</h1>   
+                <form action='home&login' method = 'post'>
+                    <input placeholder="Email..." name="email" class="form-control"><br>
+                    <input type = "password" placeholder="Password..." name="passkey" class="form-control"><br>
+                    <input type = "submit" value="SignIn" class="btn btn-primary"><br><br>
+                    <input type = "button" onclick="window.location = '<?php echo $loginURL?>'" value="SignIn With Google" class="btn btn-danger"><br>
+                    <p class='text-monospace' style="color:red;"><?php if(isset($this->view_data['Error'])){echo $this->view_data['Error']; unset($this->view_data);}?></p>        
+                    <br><br><div>Don't have an account ?<a href='#' onclick="myLogin()"> SignUp</a> instead.</div>
+
+                </form>
+
+            </div>
+        </div>
+</div>

@@ -1,0 +1,71 @@
+<?php include VIEW.'header.phtml' ?>
+
+<?php include VIEW.'dash/mailing.phtml' ?>
+
+<div class="container">
+  <div class="jumbotron">
+    <h1>Welcome</h1>
+    <p><?=$_SESSION['name']?> </p>
+  </div>
+  <p>This is some text.</p>
+  <p>This is another text.</p>
+</div>
+
+
+
+  <div class="col-sm-6">
+  <?php
+        echo "<table class= 'table table-hover'><thead class='thead-dark'> <tr> <th> Firstname </th><th> Lastname </th><th> Firstname </th></tr></thead>";
+        foreach($this->view_data as $entity ){
+            echo "<tr>";
+            foreach ($entity as $key=>$element){
+                echo "<td>".$element."</td>";
+            }
+            echo "</tr>";
+        }
+        echo "</table>";
+        ?>
+        <button onclick="myFunction()">Add Subscriber</button>
+<div class = "row" align="center" id = 'myDIV'>
+                                    <h1>Fill Details</h1>
+        <form action = 'dash&addSubscriber' method = 'post'>
+                <input placeholder="FirstName..." name="firstname" class="form-control"><br>
+                <input placeholder="LastName..." name="lastname" class="form-control"><br>
+                <input placeholder="Email..." name="email" class="form-control"><br>
+                <input type = "submit" name="submitt" value='Add' class="form-control"><br>
+        </form>              
+        </div>
+
+<div class="row">
+
+
+  </div>
+    </div>
+
+
+
+  
+      
+
+
+
+
+
+
+
+<?php 
+if(isset($this -> view_data['Message'])){
+    echo "<pre>".$this->view_data['Message']."</pre>";
+}
+?>
+<script >
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}</script>
+
+<?php include VIEW.'footer.phtml' ?>
