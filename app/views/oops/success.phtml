@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+  <meta name="author" content="GeeksLabs">
+  <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+  <link rel="shortcut icon" href="img/favicon.png">
+
+  <title>Blank | Creative - Bootstrap 3 Responsive Admin Template</title>
+
+
+  <link href="public/css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="public/css/bootstrap-theme.css" rel="stylesheet">
+
+  <link href="public/css/elegant-icons-style.css" rel="stylesheet" />
+  <link href="public/css/font-awesome.min.css" rel="stylesheet" />
+
+  <link href="public/css/style.css" rel="stylesheet">
+  <link href="public/css/style-responsive.css" rel="stylesheet" />
+
+ 
+</head>
+
+<body>
+  <!-- container section start -->
+  <section id="container" class="">
+    <!--header start-->
+
+    <header class="header dark-bg">
+      <!--logo start-->
+      <a href="home&index" class="logo">Project<span class="lite">EmailCampaign</span></a>
+      <!--logo end-->
+    </header>
+    <!--header end-->
+
+    <!--main content start-->
+    <section id="main-content-home">
+      <section class="wrapper">
+        <div class="row text-center">
+        <div class="col-md-3 " ></div>
+        <div class="col-md-6 align=center" >
+        <h1>Launch Campaign Successfull</h1>
+        <?php 
+        echo $this->view_data['message']; 
+        unset($this->view_data)?>
+        <h3><a href="dash&loadCampaignList">Go to Campaign List</a></h3>
+</form>
+        </div>
+        <h1 style="color:green ; margin-top:700px ">Email Campaign Launch Successfull<h1>
+              <h3><a href="dash&loadWelcome">Go back to Dashboard </a></h3>
+        <div class="col-md-3 " >
+       
+           
+        
+          
+       </div>
+
+      </section>
+
+    </section>
+    <!--main content end-->
+
+
+
+
+   
+  </section>
+ 
+
+
+
+</body>
+
+</html>

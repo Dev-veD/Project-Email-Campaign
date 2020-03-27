@@ -1,0 +1,108 @@
+<?php
+$loginURL = $this->view_data['URL'];
+?>
+<div class='container' style="margin: 10px 60px">
+        <div class = "row justify-content-center">
+            <div class = "col-md-12 col-offset-3" align="center">
+
+              <h1>SignIn</h1>  <br> 
+                <form action='home&login' method = 'post'>
+                    <div class="form-group has-feedback">
+                    
+                    <input placeholder="Email..." id = "email" name="email" 
+                        value="<?=isset($this->view_data['email'])? $this->view_data['email'] : NULL; ?>" 
+                        class="form-control">
+                        
+                        <br></div>
+                    <input type = "password" placeholder="Password..." id='passkey' name="passkey" class="form-control"><br>
+                    <p><a href="home&forgotPassword" style=" margin-right:160px ">forgot password ?</a></p>
+                    <br>
+                    <input class= 'btn btn-primary' type = "button" value="Sign In" id="login"><br><br>
+                    <input type = "button" onclick="window.location = '<?php echo $loginURL?>'" value="SignIn With Google" class="btn btn-danger"><br><br>
+                    <p id = 'message'class='text-monospace' style="color:red"><?php if(isset($this->view_data['SigninMessage'])){echo $this->view_data['SigninMessage']; unset($this->view_data);}?></p>        
+                    <br><br><div>Don't have an account ?<a href="" onclick="myLogin()"> SignUp</a> instead.</div>
+                </form>
+                
+            </div>
+        </div>
+</div>
+
+<!--Modal-->
+
+<!--Modal over-->
+
+
+
+<script
+			  src="http://code.jquery.com/jquery-3.4.1.min.js"
+			  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+              crossorigin="anonymous">
+</script>
+              
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#login").on('click', function(){
+            var email = $("#email").val();
+            var password = $("#passkey").val();
+
+           if(email =="" || password == ""){
+               alert("Please Fill in all Required Fields");
+           }
+           else{
+            $.ajax(
+               {
+                   url:'home&login',
+                   method:"POST",
+                   data:{
+                       email: email,
+                       passkey: password
+                   },
+                   success: function(response){
+                   
+                    if (response.indexOf('Verified')>=0)
+                        window.location = 'dash&loadWelcome';
+                    else
+                    $("#message").html(response);
+                   },
+                   dataType:'text'  
+               }
+           );
+           }
+           
+        });
+    }
+    );
+    </script>
+
+                  
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#reset").on('click', function(){
+            var email = $("#emailb").val();
+            console.log(email);
+           if(email =="" ){
+               alert("Please Fill in all Required Fields");
+           }
+           else{
+            $.ajax(
+               {
+                   url:'home&forgotPassword',
+                   method:"POST",
+                   data:{
+                       email: email,
+                   },
+                   success: function(response){
+                    if (response.indexOf('Sent')>=0)
+                    $("#messageReset").html("Email sent");
+                    else
+                    $("#messageReset").html("Error");
+                   },
+                   dataType:'text'  
+               }
+           );
+           }
+           
+        });
+    }
+    );
+    </script>

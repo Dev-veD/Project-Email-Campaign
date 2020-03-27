@@ -1,0 +1,243 @@
+
+<?php session_start();
+if (!isset($_SESSION['LoggedIn'])) {
+    header("Location: home&index");
+}
+?>
+<?php include ROOT.'public/header.php'; ?>
+<?php include ROOT.'public/topnav.php'; ?>
+<?php include ROOT.'public/sidenav.php'; ?>
+
+<section id="main-content">
+  <section class="wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+        <h3 class="page-header"><i class="fa fa fa-bars"></i> List of all Subscribers</h3>
+        <a class="btn btn-primary" data-toggle="modal" href="#launchCampaign">
+          Add Subscriber
+        </a>
+
+
+        <br>
+        <br>
+        <ol class="breadcrumb">
+          <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+          <li><i class="fa fa-bars"></i>Subscriber List</li>
+
+        </ol>
+
+      </div>
+    </div>
+
+
+    <form class="form-inline" role="form" action="dash&getSubscriberSearchResults" method="post">
+      <div class="form-group">
+        <input type="text" name="element" class="form-control round-input lg-input" placeholder="Search by name, email">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Go</button>
+    </form><br>
+
+    <!--Subscribers List Starts Here-->
+
+    <div class="row">
+      <div class="col-lg-12">
+
+        <section class="panel ">
+          <header class="panel-heading  col-lg-12">
+            All Data
+          </header>
+
+          <table class="table table-striped table-advance table-hover" id="main">
+            <tbody>
+              <tr>
+                <th><i class="icon_profile"></i> Full Name</th>
+                <th><i class="icon_calendar"></i> Email </th>
+                <th><i class="icon_mail_alt"></i> Category</th>
+                <th><i class="icon_pin_alt"></i> Date </th>
+              
+                <th><i class="icon_cogs"></i> Remove</th>
+              </tr>
+
+              <?php
+        foreach ($this->view_data as $entity) {
+            $id = $entity['sub_id'];
+            echo "<tr id='".$id."'>";
+            foreach ($entity as $key=>$element) {
+              if($key == 'sub_id')
+              {
+                echo '<td><div class="btn-group"><a class="btn btn-danger" href="dash&removeSubscriber?id='.$id.'"><i class="icon_close_alt2"></i></a>
+                </div></td>';
+              }
+          else if($key=="reg_date")
+            {$x = str_split($element,10);
+              
+              echo "<td>".$x[0]."</td>";
+
+            }
+                else
+                echo "<td>".$element."</td>";
+            }
+            
+            
+            echo '</tr>';
+        }
+        echo "</table>";
+        ?>
+
+
+
+
+
+<!--MODAL START-->
+
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="updateSub" class="modal fade">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <h4 class="modal-title">Subscriber Update</h4>
+                      </div>
+                      <div class="modal-body">
+
+                        <form role="form">
+                          
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Fullname</label>
+                            <input type="text" class="form-control" id="exampleInputPassword3" placeholder="Fullname">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="exampleInputPassword1">Category</label>
+                            <input type="text" class="form-control" id="exampleInputPassword3" placeholder="Fullname">
+                          </div>
+
+                        
+                          <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<script>
+              
+</script>
+<!--MODAL ENDS-->
+
+
+
+
+              <div class="modal fade" id="launchCampaign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                      <h4 class="modal-title">Add New Subscriber</h4>
+                    </div>
+                    <div class="modal-body">
+
+                      <!--Form For Filling Campaign Details -->
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <section class="panel">
+                            <header class="panel-heading">
+                              Subscriber Detail
+                            </header>
+                            <div class="panel-body">
+
+                              <div class="form">
+                                <form class="form-validate form-horizontal " id="register_form">
+                                  <div class="form-group ">
+                                    <label for="fullname" class="control-label col-lg-3">Full Name <span
+                                        class="required">*</span></label>
+                                    <div class="col-lg-9">
+                                      <input class=" form-control" id="fullname" name="fullname" type="text" />
+                                    </div>
+                                  </div>
+                                  <div class="form-group ">
+                                    <label for="email" class="control-label col-lg-3">Email <span
+                                        class="required">*</span></label>
+                                    <div class="col-lg-9">
+                                      <input class="form-control " id="email" name="email" type="email" />
+                                    </div>
+                                  </div>
+                                  <div class="form-group ">
+                                    <label for="job" class="control-label col-lg-3">Job <span
+                                        class="required">*</span></label>
+                                    <div class="col-lg-9">
+                                      <input class="form-control " id="job" name="job" type="text" />
+                                    </div>
+                                    <div class="row">
+                                      <br>
+                                      <br>
+                                      <span class="col-lg-2"></span>
+                                      <span class="col-lg-12" id="smessage" style="color:green"></span>
+                                      <span class="col-lg-12" id="emessage" style="color:red"></span>
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                      <button data-dismiss="modal" id="addSub" class="btn btn-primary" type="button">Add</button>
+                                      <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+
+                            </div>
+                          </section>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </section>
+  </section>
+
+  <script src="http://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
+    </script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $("#addSub").on('click', function () {
+        var email = $("#email").val();
+        var fullname = $("#fullname").val();
+        var job = $("#job").val();
+
+
+        $.ajax(
+          {
+            url: 'dash&addSubscriber',
+            method: "POST",
+            data: {
+              fullname: fullname,
+              email: email,
+              job: job
+            },
+            success: function (response) {
+
+              if (response.indexOf('successfull') >= 0)
+                $("#smessage").html("Added Successfully");
+              else
+                $("#emessage").html("Some Error Occured");
+            },
+            dataType: 'text'
+          }
+        );
+
+
+      });
+    }
+    );
+  </script>
+  <?php include ROOT.'public/footer.php'; ?>
